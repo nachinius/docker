@@ -1,10 +1,13 @@
 # Developement server for EACO
 #
 # use docker-osx-dev for rsync your dev foler
-#
+# ```
+#     docker-osx-dev -s $PWD
+# ```
+
 # Spin the dev server by running
 # ```
-#     docker run -d -P -v "$PWD":/code nachinius/
+#     docker run -d -p 9001 -p 35729:35729 -v "$PWD":/code nachinius/static-app-dev-grunt
 # ```
 # 
 FROM node:0.12.5
@@ -26,5 +29,5 @@ CMD ["grunt", "serve"]
 # Your app should be listening in this port
 EXPOSE 9001
 
-# livereload
+# livereload port
 EXPOSE 35729
