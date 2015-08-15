@@ -1,6 +1,10 @@
 # docker
 some dockerfiles to use with docker's automated builds.
 
+## c-dev
+
+For nice and quick c compiling and running
+
 ## python3/3.4/trusty
 
 A python 3.4.3 in ubuntu's trusty.
