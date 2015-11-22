@@ -30,6 +30,7 @@ RUN echo "export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking \n \
 
 
 RUN apt-get install -y locate
+RUN apt-get install -y tree
 RUN updatedb
 
 CMD ["/bin/bash"]
