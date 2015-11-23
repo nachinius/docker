@@ -5,12 +5,21 @@ MAINTAINER nachinius <ignacio.peixoto@gmail.com>
 # disable interactive
 ENV DEBIAN_FRONTEND noninteractive
 
-# Configure PHP (CLI and Apache)
-RUN php_ini="/usr/local/etc/php/conf.d/date-timezone.conf" && \
-    echo "date.timezone = UTC" >> $php_ini
+RUN PHP_INI_DIR="/usr/local/etc/php"
 
+# PHP Extensions
+#RUN docker-php-ext-install mcrypt zip bz2 mbstring \
+#  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+#    && docker-php-ext-install gd
 
-RUN curl -sS https://getcomposer.org/installer | php
+# Memory Limit
+#RUN echo "memory_limit=1024M" > $PHP_INI_DIR/conf.d/memory-limit.ini
+
+# Time Zone
+RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
+
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ENV NODE_VERSION 0.12.7
 ENV NPM_VERSION 2.14.1
