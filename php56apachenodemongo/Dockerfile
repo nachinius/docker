@@ -9,7 +9,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN buildDeps="libssl-dev libsasl2-dev" \
 	&& set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-	&& pecl install mongodb
+	&& pecl install mongodb && pecl install mongo
 
 RUN echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongodb.ini
+RUN echo "extension=mongo.so" > $PHP_INI_DIR/conf.d/mongo.ini
 
